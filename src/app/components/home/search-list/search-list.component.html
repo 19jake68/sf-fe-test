@@ -1,0 +1,44 @@
+<!-- Loading -->
+<div class="text-center" *ngIf="isLoading">
+  <div class="spinner-border text-success" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+
+<ul class="list-unstyled list-group list-group-striped list-group-hover">
+  <li class="list-item d-flex" *ngFor="let bike of searchResult" [routerLink]="'/bike/' + bike.id">
+    <!-- Image Container -->
+    <div class="image-container m-2">
+      <div class="bg bg-secondary" [ngStyle]="{'background-image': 'url(' + bike.thumb + ')'}" [title]="bike.title">
+      </div>
+    </div>
+
+    <!-- Content Container -->
+    <div class="content-container m-2 flex-fill">
+      <h6 class="text-info">{{ bike.title }}</h6>
+      <ul class="list-unstyled row text-secondary small">
+        <li class="list-item col-sm-6">
+          <strong>Serial:</strong> {{ bike.serial }}
+        </li>
+        <li class="list-item col-sm-6" *ngIf="bike.stolen">
+          <strong class="text-danger">{{ bike.status | uppercase
+            }}:</strong> {{ bike.date_stolen * 1000 | date: 'MMMM d, y h:mm a' }}
+        </li>
+        <li class="list-item col-sm-6" *ngIf="!bike.stolen">
+          <strong class="text-success">{{ bike.status | uppercase }}:</strong> {{ bike.location_found }}
+        </li>
+        <li class="list-item col-sm-6" *ngIf="bike.frame_colors">
+          <strong>Primary colors:</strong> {{ bike.frame_colors | arrayToString }}
+        </li>
+        <li class="list-item col-sm-6" *ngIf="bike.stolen">
+          <strong>Location:</strong> {{ bike.stolen_location }}
+        </li>
+      </ul>
+    </div>
+  </li>
+</ul>
+
+<!-- No items found -->
+<div *ngIf="!isLoading && searchResult.length === 0" class="col text-center text-danger">
+  <p>No result found</p>
+</div>

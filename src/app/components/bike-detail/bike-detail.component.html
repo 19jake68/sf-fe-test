@@ -1,0 +1,130 @@
+<div class="container my-5">
+  <div class="row">
+    <div class="col-lg-7">
+      <ng-container *ngIf="(bikeDetails$ | async) as bikeDetails">
+        <h3 class="text-danger fw-bolder mb-0" *ngIf="bikeDetails.stolen" [innerText]="bikeDetails.status | uppercase">
+        </h3>
+        <h3 class="text-success fw-bolder mb-0" *ngIf="!bikeDetails.stolen"
+          [innerText]="bikeDetails.status | uppercase">
+        </h3>
+        <h1 class="text-info fw-bolder mb-0" [innerText]="bikeDetails.title"></h1>
+
+        <!-- Stolen -->
+        <div *ngIf="bikeDetails.stolen" class="text-secondary">
+          <p><strong>Stolen</strong> {{ bikeDetails.stolen_record.date_stolen * 1000 | date: 'MMMM d, y h:mm a' }}
+            <strong>from</strong> {{ bikeDetails.stolen_location }}
+          </p>
+        </div>
+
+        <!-- Found -->
+        <div *ngIf="bikeDetails.location_found" class="text-secondary">
+          <p><strong>Found in</strong> {{ bikeDetails.location_found }}</p>
+        </div>
+
+        <!-- Images -->
+        <div class="mb-3">
+          <ngb-carousel *ngIf="bikeDetails.public_images.length > 0">
+            <ng-template ngbSlide *ngFor="let image of bikeDetails.public_images">
+              <div class="text-center bg-dark bg-gradient">
+                <img [src]="image.medium" [alt]="image.name" />
+              </div>
+            </ng-template>
+          </ngb-carousel>
+        </div>
+
+        <!-- Description -->
+        <div class="text-secondary">
+          <ul class="list-unstyled row">
+            <li class="list-item col-sm-6 py-1 col-xs-12">
+              <strong>Serial:</strong>&nbsp;
+              <span [ngClass]="{'fst-italic': bikeDetails.status === 'found'}">{{ bikeDetails.serial }}</span>
+            </li>
+            <li class="list-item col-sm-6 py-1 col-xs-12" *ngIf="bikeDetails.name">
+              <strong>Model:</strong> {{ bikeDetails.name }}
+            </li>
+            <li class="list-item col-sm-6 py-1 col-xs-12" *ngIf="bikeDetails.frame_model">
+              <strong>Model:</strong> {{ bikeDetails.frame_model }}
+            </li>
+            <li class="list-item col-sm-6 py-1 col-xs-12" *ngIf="bikeDetails.frame_colors">
+              <strong>Primacy colors:</strong> {{ bikeDetails.frame_colors | arrayToString }}
+            </li>
+            <li class="list-item col-sm-6 py-1 col-xs-12" *ngIf="bikeDetails.handlebar_type_slug">
+              <strong>Handlebar type:</strong>&nbsp;
+              <span class="text-capitalize">{{ bikeDetails.handlebar_type_slug }}</span>
+            </li>
+            <li class="list-item col-sm-6 py-1 col-xs-12" *ngIf="bikeDetails.type_of_cycle">
+              <strong>Type of cycle:</strong> {{ bikeDetails.type_of_cycle }}
+            </li>
+            <li class="list-item col-sm-6 py-1 col-xs-12">
+              <strong>Manufacturer:</strong> {{ bikeDetails.manufacturer_name }}
+            </li>
+            <li class="list-item col-sm-6 py-1 col-xs-12">
+              <strong>Year:</strong> {{ bikeDetails.year }}
+            </li>
+          </ul>
+
+          <div *ngIf="bikeDetails.description">
+            <h4 class="text-info">DISTINGUISHING FEATURES</h4>
+            <p [innerText]="bikeDetails.description"></p>
+          </div>
+
+          <div *ngFor="let component of bikeDetails.components">
+            <h4 class="text-info" [innerText]="component.component_group"></h4>
+            <p class="mb-0"><strong class="text-capitalize">{{ component.component_type }}</strong> {{
+              component.description }}</p>
+            <p>{{ component.model_name }} <span *ngIf="component.manufacturer_name">({{ component.manufacturer_name
+                }})</span></p>
+          </div>
+        </div>
+
+      </ng-container>
+
+      <!-- Loading skeleton -->
+      <ng-container *ngIf="isLoading">
+        <div>
+          <ngx-skeleton-loader [theme]="{'height.px': 30, 'width.px': 100}"></ngx-skeleton-loader>
+        </div>
+        <div>
+          <ngx-skeleton-loader [theme]="{'height.px': 40, 'width.px': 500}"></ngx-skeleton-loader>
+        </div>
+        <div>
+          <ngx-skeleton-loader [theme]="{'height.px': 20, 'width.px': 350, 'margin-bottom': '1rem'}">
+          </ngx-skeleton-loader>
+        </div>
+        <div>
+          <ngx-skeleton-loader [theme]="{'height.px': 400, 'width.px': 700, 'margin-bottom': '1rem'}">
+          </ngx-skeleton-loader>
+        </div>
+
+        <ul class="list-unstyled row">
+          <li class="list-item col-6">
+            <ngx-skeleton-loader [theme]="{'height.px': 20, 'width.px': 200}"></ngx-skeleton-loader>
+          </li>
+          <li class="list-item col-6">
+            <ngx-skeleton-loader [theme]="{'height.px': 20, 'width.px': 200}"></ngx-skeleton-loader>
+          </li>
+          <li class="list-item col-6">
+            <ngx-skeleton-loader [theme]="{'height.px': 20, 'width.px': 200}"></ngx-skeleton-loader>
+          </li>
+          <li class="list-item col-6">
+            <ngx-skeleton-loader [theme]="{'height.px': 20, 'width.px': 200}"></ngx-skeleton-loader>
+          </li>
+          <li class="list-item col-6">
+            <ngx-skeleton-loader [theme]="{'height.px': 20, 'width.px': 200}"></ngx-skeleton-loader>
+          </li>
+          <li class="list-item col-6">
+            <ngx-skeleton-loader [theme]="{'height.px': 20, 'width.px': 200}"></ngx-skeleton-loader>
+          </li>
+        </ul>
+
+        <div>
+          <ngx-skeleton-loader [theme]="{'height.px': 30, 'width.px': 200}"></ngx-skeleton-loader>
+        </div>
+        <div>
+          <ngx-skeleton-loader [theme]="{'height.px': 20, 'width.px': 350, 'margin-bottom': '1rem'}">
+          </ngx-skeleton-loader>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

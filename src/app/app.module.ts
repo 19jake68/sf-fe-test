@@ -1,17 +1,34 @@
-import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { BikeDetailComponent } from './components/bike-detail/bike-detail.component';
+import { ArrayToStringPipe } from './pipes/array-to-string.pipe';
+import { HomeComponent } from './components/home/home.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { SearchListComponent } from './components/home/search-list/search-list.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    BikeDetailComponent,
+    ArrayToStringPipe,
+    HomeComponent,
+    SearchListComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    NgbModule,
+    NgxSkeletonLoaderModule,
+    ReactiveFormsModule,
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
   bootstrap: [AppComponent]
 })

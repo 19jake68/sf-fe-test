@@ -1,0 +1,24 @@
+<div class="container my-5">
+  <div class="row">
+    <div class="col-12 mb-5">
+      <form [formGroup]="searchForm" (ngSubmit)="onSubmit(searchForm.value)" class="row">
+        <div class="col-lg-10 col-md-9 col-sm-12">
+          <input type="search" type="search" formControlName="location" class="form-control d-block mb-2"
+            placeholder="Search bike location" aria-label="Search bike location" required>
+        </div>
+        <div class="col-lg-2 col-md-3 col-sm-12">
+          <button type="submit" class="btn btn-primary w-100 d-none d-md-block">
+            <i class="bi bi-search"></i>
+          </button>
+          <button type="submit" class="btn btn-primary w-100 mt-2 d-sm-block d-md-none">
+            <i class="bi bi-search"></i>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <div class="col-12">
+      <app-search-list [location]="location"></app-search-list>
+    </div>
+  </div>
+</div>
