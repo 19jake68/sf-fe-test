@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/internal/Observable';
@@ -11,7 +11,7 @@ import { takeUntil, map, tap } from 'rxjs/operators';
   templateUrl: './bike-detail.component.html',
   styleUrls: ['./bike-detail.component.scss'],
 })
-export class BikeDetailComponent implements OnInit {
+export class BikeDetailComponent implements OnInit, OnDestroy {
   /**
    * Bike Details
    */
