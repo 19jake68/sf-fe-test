@@ -46,6 +46,13 @@ export class BikeDetailComponent implements OnInit {
         this.titleService.setTitle(
           `${response.bike.status.toUpperCase()} ${response.bike.title}`
         );
+
+        if (response.bike.public_images.length === 0) {
+          response.bike.public_images.push({
+            medium: '/assets/images/bike-placeholder.svg',
+          });
+        }
+
         return response.bike;
       }),
       tap(() => (this.isLoading = false))

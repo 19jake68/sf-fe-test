@@ -9,7 +9,7 @@
   <li class="list-item d-flex" *ngFor="let bike of searchResult" [routerLink]="'/bike/' + bike.id">
     <!-- Image Container -->
     <div class="image-container m-2">
-      <div class="bg bg-secondary" [ngStyle]="{'background-image': 'url(' + bike.thumb + ')'}" [title]="bike.title">
+      <div class="bg" [ngStyle]="{'background-image': 'url(' + bike.thumb + ')'}" [title]="bike.title">
       </div>
     </div>
 
@@ -32,6 +32,9 @@
         </li>
         <li class="list-item col-sm-6" *ngIf="bike.stolen">
           <strong>Location:</strong> {{ bike.stolen_location }}
+        </li>
+        <li class="list-item col-sm-6" *ngIf="bike.year">
+          <strong>Year:</strong> {{ bike.year }}
         </li>
       </ul>
     </div>

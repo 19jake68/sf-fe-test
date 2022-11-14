@@ -2,3 +2,28 @@
 // Import bootstrap scss
 @import "~bootstrap/scss/bootstrap";
 @import "~bootstrap-icons/font/bootstrap-icons.css";
+
+ul.list-group {
+  &.list-group-striped > li {
+    &:nth-of-type(odd) {
+      background-color: $gray-200;
+    }
+
+    &:nth-of-type(even) {
+      background-color: $gray-300;
+    }
+  }
+
+  &.list-group-hover > li:hover {
+    background-color: $white;
+    cursor: pointer;
+  }
+}
+
+.image-container .bg {
+  width: 150px;
+  height: 150px;
+  background-color: $gray-200;
+  background-position: center;
+  background-size: cover;
+}
