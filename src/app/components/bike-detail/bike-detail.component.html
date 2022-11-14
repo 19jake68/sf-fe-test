@@ -1,6 +1,6 @@
 <div class="container my-5">
   <div class="row">
-    <div class="col-lg-7">
+    <div class="col-lg-8">
       <ng-container *ngIf="(bikeDetails$ | async) as bikeDetails">
         <h3 class="text-danger fw-bolder mb-0" *ngIf="bikeDetails.stolen" [innerText]="bikeDetails.status | uppercase">
         </h3>
@@ -34,7 +34,7 @@
 
         <!-- Description -->
         <div class="text-secondary">
-          <ul class="list-unstyled row">
+          <ul class="list-unstyled row small">
             <li class="list-item col-sm-6 py-1 col-xs-12">
               <strong>Serial:</strong>&nbsp;
               <span [ngClass]="{'fst-italic': bikeDetails.status === 'found'}">{{ bikeDetails.serial }}</span>
@@ -65,15 +65,22 @@
 
           <div *ngIf="bikeDetails.description">
             <h4 class="text-info">DISTINGUISHING FEATURES</h4>
-            <p [innerText]="bikeDetails.description"></p>
+            <p class="small" [innerText]="bikeDetails.description"></p>
           </div>
 
-          <div *ngFor="let component of bikeDetails.components">
-            <h4 class="text-info" [innerText]="component.component_group"></h4>
-            <p class="mb-0"><strong class="text-capitalize">{{ component.component_type }}</strong> {{
-              component.description }}</p>
-            <p>{{ component.model_name }} <span *ngIf="component.manufacturer_name">({{ component.manufacturer_name
-                }})</span></p>
+          <div *ngFor="let component of bikeDetails.components | keyvalue">
+            <h4 class="text-info uppercase" [innerText]="component.key"></h4>
+            <ul class="list-unstyled row small">
+              <li class="list-item col-sm-6 py-1 col-xs-12" *ngFor="let details of $any(component).value">
+                <p class="mb-0">
+                  <span class="fw-bold" *ngIf="details.front">Front&nbsp;</span>
+                  <span class="fw-bold" *ngIf="details.rear">Rear&nbsp;</span>
+                  <strong class="text-capitalize">{{ details.component_type}}</strong> {{ details.description }}
+                </p>
+                <p *ngIf="details.model_name">{{ details.model_name }} <span *ngIf="details.manufacturer_name">({{
+                    details.manufacturer_name}})</span></p>
+              </li>
+            </ul>
           </div>
         </div>
 
@@ -97,22 +104,22 @@
         </div>
 
         <ul class="list-unstyled row">
-          <li class="list-item col-6">
+          <li class="list-item col-sm-6 py-1 col-xs-12">
             <ngx-skeleton-loader [theme]="{'height.px': 20, 'width.px': 200}"></ngx-skeleton-loader>
           </li>
-          <li class="list-item col-6">
+          <li class="list-item col-sm-6 py-1 col-xs-12">
             <ngx-skeleton-loader [theme]="{'height.px': 20, 'width.px': 200}"></ngx-skeleton-loader>
           </li>
-          <li class="list-item col-6">
+          <li class="list-item col-sm-6 py-1 col-xs-12">
             <ngx-skeleton-loader [theme]="{'height.px': 20, 'width.px': 200}"></ngx-skeleton-loader>
           </li>
-          <li class="list-item col-6">
+          <li class="list-item col-sm-6 py-1 col-xs-12">
             <ngx-skeleton-loader [theme]="{'height.px': 20, 'width.px': 200}"></ngx-skeleton-loader>
           </li>
-          <li class="list-item col-6">
+          <li class="list-item col-sm-6 py-1 col-xs-12">
             <ngx-skeleton-loader [theme]="{'height.px': 20, 'width.px': 200}"></ngx-skeleton-loader>
           </li>
-          <li class="list-item col-6">
+          <li class="list-item col-sm-6 py-1 col-xs-12">
             <ngx-skeleton-loader [theme]="{'height.px': 20, 'width.px': 200}"></ngx-skeleton-loader>
           </li>
         </ul>
@@ -125,6 +132,12 @@
           </ngx-skeleton-loader>
         </div>
       </ng-container>
+    </div>
+
+    <div class="col-lg-4">
+      <div class="bg-light h-100 d-flex justify-content-center align-items-center">
+        <i>Too much white spaces? Place your ads here!</i>
+      </div>
     </div>
   </div>
 </div>

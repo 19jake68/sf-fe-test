@@ -1,0 +1,58 @@
+<div class="bg-dark small py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-6 col-md-3 col-lg-2">
+        <ul class="list-unstyled">
+          <li class="list-item text-white text-uppercase mb-2"><strong>Bike Index</strong></li>
+          <li *ngFor="let menu of bikeIndexMenu" class="list-item mb-2">
+            <a [routerLink]="menu.url" class="text-white-50">{{ menu.name }}</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-6 col-md-3 col-lg-2">
+        <ul class="list-unstyled">
+          <li class="list-item text-white text-uppercase mb-2"><strong>Support Us</strong></li>
+          <li *ngFor="let menu of supportUsMenu" class="list-item mb-2">
+            <a [routerLink]="menu.url" class="text-white-50">{{ menu.name }}</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-6 col-md-3 col-lg-2">
+        <ul class="list-unstyled">
+          <li class="list-item text-white text-uppercase mb-2"><strong>Support Us</strong></li>
+          <li *ngFor="let menu of resourcesMenu" class="list-item mb-2">
+            <a [routerLink]="menu.url" class="text-white-50">{{ menu.name }}</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-6 col-md-3 col-lg-2">
+        <ul class="list-unstyled">
+          <li class="list-item text-white text-uppercase mb-2"><strong>Who We Serve</strong></li>
+          <li *ngFor="let menu of whoWeServeMenu" class="list-item mb-2">
+            <a [routerLink]="menu.url" class="text-white-50">{{ menu.name }}</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-12 col-md-12 col-lg-4 d-flex justify-content-end">
+        <a *ngFor="let sn of socialIcons" [href]="sn.url" [title]="sn.name" target="_blank"
+          class="text-white fs-2 px-1">
+          <i class="bi" [ngClass]="sn.icon"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="bg-black text-secondary small py-3">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        2022 &copy; Frontend Coding Assessment.
+      </div>
+    </div>
+  </div>
+</div>

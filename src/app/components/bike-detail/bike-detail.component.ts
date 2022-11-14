@@ -31,7 +31,7 @@ export class BikeDetailComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private bikeService: BikeService,
     private titleService: Title
-  ) {}
+  ) { }
 
   /**
    * Call API and format data
@@ -43,15 +43,24 @@ export class BikeDetailComponent implements OnInit {
     this.bikeDetails$ = this.bikeService.getBikeById(bikeId).pipe(
       takeUntil(this.destroy$),
       map((response) => {
+        // Set title
         this.titleService.setTitle(
           `${response.bike.status.toUpperCase()} ${response.bike.title}`
         );
 
+        // Add placeholder for null images
         if (response.bike.public_images.length === 0) {
           response.bike.public_images.push({
             medium: '/assets/images/bike-placeholder.svg',
           });
         }
+
+        // Group similar components
+        response.bike.components = response.bike.components.reduce((acc: any, curr: any) => {
+          if (!acc[curr.component_group]) acc[curr.component_group] = [];
+          acc[curr.component_group].push(curr);
+          return acc;
+        }, {});
 
         return response.bike;
       }),

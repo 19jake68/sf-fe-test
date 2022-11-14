@@ -3,6 +3,14 @@
 @import "~bootstrap/scss/bootstrap";
 @import "~bootstrap-icons/font/bootstrap-icons.css";
 
+a {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
 ul.list-group {
   &.list-group-striped > li {
     &:nth-of-type(odd) {
