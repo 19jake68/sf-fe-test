@@ -11,6 +11,8 @@ import { ArrayToStringPipe } from './pipes/array-to-string.pipe';
 import { HomeComponent } from './components/home/home.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SearchListComponent } from './components/home/search-list/search-list.component';
+import { FooterComponent } from './shared/components/footer/footer.component';
+import { HeaderComponent } from './shared/components/header/header.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { SearchListComponent } from './components/home/search-list/search-list.c
     BikeDetailComponent,
     ArrayToStringPipe,
     HomeComponent,
-    SearchListComponent
+    SearchListComponent,
+    FooterComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
