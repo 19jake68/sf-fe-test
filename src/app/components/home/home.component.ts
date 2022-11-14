@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
@@ -6,7 +6,7 @@ import { FormControl, FormGroup } from '@angular/forms';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
   /**
    * Form data
    */
@@ -16,9 +16,7 @@ export class HomeComponent implements OnInit {
 
   @Output() location!: string;
 
-  constructor() {}
-
-  ngOnInit(): void {}
+  constructor() { }
 
   onSubmit(formData: any): void {
     if (!formData.location) return;
